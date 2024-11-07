@@ -109,8 +109,11 @@
       }
       
       // Replace the last part of the IP and create the final URL
-      ipParts[3] = selectedSub;
-      const finalUrl = `http://${ipParts.join("")}`;
+      const baseIp = ipParts.slice(0, 3).join("."); // Get the first three segments
+      const finalUrl = `http://${baseIp}${selectedSub}`;
+      
+      // Debugging output
+      console.log("Final URL:", finalUrl);
       
       // Open the link in a new tab
       window.open(finalUrl, "_blank");
