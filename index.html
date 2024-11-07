@@ -4,45 +4,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camera Link Generator</title>
+  <style>
+    /* Reset some basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #4a90e2, #9013fe);
+      color: #333;
+    }
+
+    /* Container Styling */
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #4a90e2;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    /* Button Styling */
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #4a90e2;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3a78c2;
+    }
+  </style>
 </head>
 <body>
-  <h2>Camera Link Generator</h2>
-  
-  <!-- Input for IP address -->
-  <label for="ipAddress">Enter IP Address:</label>
-  <input type="text" id="ipAddress" placeholder="e.g., 10.250.1.2" required>
-  
-  <!-- Dropdown to select SUB -->
-  <label for="subSelect">Select SUB:</label>
-  <select id="subSelect">
-    <option value=".108:8000">SUB1 (.108:8000)</option>
-    <option value=".109:8001">SUB2 (.109:8001)</option>
-    <option value=".110:8002">SUB3 (.110:8002)</option>
-  </select>
-  
-  <!-- Button to generate the link -->
-  <button onclick="generateLink()">Open Camera</button>
-  
-  <script>
-    function generateLink() {
-      // Get the IP and SUB values
-      const ipAddress = document.getElementById("ipAddress").value;
-      const selectedSub = document.getElementById("subSelect").value;
-      
-      // Split the IP to replace the last segment
-      const ipParts = ipAddress.split(".");
-      if (ipParts.length !== 4) {
-        alert("Please enter a valid IP address.");
-        return;
-      }
-      
-      // Replace the last part of the IP and create the final URL
-      ipParts[3] = selectedSub;
-      const finalUrl = `http://${ipParts.join("")}`;
-      
-      // Open the link in a new tab
-      window.open(finalUrl, "_blank");
-    }
-  </script>
-</body>
-</html>
+  <div class="container">
+    <h2>Camera Link Generator</h2>
+    
+    <!-- Input for IP address -->
+    <label for="ipAddress">Enter IP Address:</label>
+    <input type="text" id="ipAddress" placeholder="e.g., 10.250.1.2" required>
+    
+    <!-- Dropdown to select SUB -->
+    <label for="subSelect">Select SUB:</label>
+    <select id="subSelect">
+      <option value=".108:8000">SUB1 (.108:8000)</option>
+      <opt
