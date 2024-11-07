@@ -47,7 +47,7 @@
       color: #555;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 0.75rem;
       margin-top: 0.5rem;
@@ -56,9 +56,14 @@
       font-size: 1rem;
     }
 
-    /* Button Styling */
-    button {
+    /* Button Styling for SUB Options */
+    .sub-buttons {
+      display: flex;
+      justify-content: space-around;
       margin-top: 1.5rem;
+    }
+
+    .sub-buttons button {
       padding: 0.75rem 1.5rem;
       border: none;
       border-radius: 4px;
@@ -68,9 +73,10 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 100px;
     }
 
-    button:hover {
+    .sub-buttons button:hover {
       background-color: #3a78c2;
     }
   </style>
@@ -81,25 +87,20 @@
     
     <!-- Input for IP address -->
     <label for="ipAddress">Enter IP Address:</label>
-    <input type="text" id="ipAddress" placeholder="e.g., 10.250.1.2" required>
+    <input type="text" id="ipAddress" placeholder="e.g., 10.248.112.2" required>
     
-    <!-- Dropdown to select SUB -->
-    <label for="subSelect">Select SUB:</label>
-    <select id="subSelect">
-      <option value=".108:8000">SUB1 (.108:8000)</option>
-      <option value=".109:8001">SUB2 (.109:8001)</option>
-      <option value=".110:8002">SUB3 (.110:8002)</option>
-    </select>
-    
-    <!-- Button to generate the link -->
-    <button onclick="generateLink()">Open Camera</button>
+    <!-- Buttons to select SUB -->
+    <div class="sub-buttons">
+      <button onclick="generateLink('.108:8000')">SUB1</button>
+      <button onclick="generateLink('.109:8001')">SUB2</button>
+      <button onclick="generateLink('.110:8002')">SUB3</button>
+    </div>
   </div>
 
   <script>
-    function generateLink() {
-      // Get the IP and SUB values
+    function generateLink(subValue) {
+      // Get the IP value
       const ipAddress = document.getElementById("ipAddress").value;
-      const selectedSub = document.getElementById("subSelect").value;
       
       // Split the IP to replace the last segment
       const ipParts = ipAddress.split(".");
@@ -109,8 +110,11 @@
       }
       
       // Replace the last part of the IP and create the final URL
-      ipParts[3] = selectedSub;
-      const finalUrl = `https://${ipParts.join("")}`;
+      const baseIp = ipParts.slice(0, 3).join("."); // Get the first three segments
+      const finalUrl = `http://${baseIp}${subValue}`;
+      
+      // Debugging output
+      console.log("Final URL:", finalUrl);
       
       // Open the link in a new tab
       window.open(finalUrl, "_blank");
