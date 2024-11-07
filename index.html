@@ -87,4 +87,34 @@
     <label for="subSelect">Select SUB:</label>
     <select id="subSelect">
       <option value=".108:8000">SUB1 (.108:8000)</option>
-      <opt
+      <option value=".109:8001">SUB2 (.109:8001)</option>
+      <option value=".110:8002">SUB3 (.110:8002)</option>
+    </select>
+    
+    <!-- Button to generate the link -->
+    <button onclick="generateLink()">Open Camera</button>
+  </div>
+
+  <script>
+    function generateLink() {
+      // Get the IP and SUB values
+      const ipAddress = document.getElementById("ipAddress").value;
+      const selectedSub = document.getElementById("subSelect").value;
+      
+      // Split the IP to replace the last segment
+      const ipParts = ipAddress.split(".");
+      if (ipParts.length !== 4) {
+        alert("Please enter a valid IP address.");
+        return;
+      }
+      
+      // Replace the last part of the IP and create the final URL
+      ipParts[3] = selectedSub;
+      const finalUrl = `http://${ipParts.join("")}`;
+      
+      // Open the link in a new tab
+      window.open(finalUrl, "_blank");
+    }
+  </script>
+</body>
+</html>
