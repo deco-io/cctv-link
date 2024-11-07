@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Link Generator</title>
+</head>
+<body>
+  <h2>Camera Link Generator</h2>
+  
+  <!-- Input for IP address -->
+  <label for="ipAddress">Enter IP Address:</label>
+  <input type="text" id="ipAddress" placeholder="e.g., 10.250.1.2" required>
+  
+  <!-- Dropdown to select SUB -->
+  <label for="subSelect">Select SUB:</label>
+  <select id="subSelect">
+    <option value=".108:8000">SUB1 (.108:8000)</option>
+    <option value=".109:8001">SUB2 (.109:8001)</option>
+    <option value=".110:8002">SUB3 (.110:8002)</option>
+  </select>
+  
+  <!-- Button to generate the link -->
+  <button onclick="generateLink()">Open Camera</button>
+  
+  <script>
+    function generateLink() {
+      // Get the IP and SUB values
+      const ipAddress = document.getElementById("ipAddress").value;
+      const selectedSub = document.getElementById("subSelect").value;
+      
+      // Split the IP to replace the last segment
+      const ipParts = ipAddress.split(".");
+      if (ipParts.length !== 4) {
+        alert("Please enter a valid IP address.");
+        return;
+      }
+      
+      // Replace the last part of the IP and create the final URL
+      ipParts[3] = selectedSub;
+      const finalUrl = `http://${ipParts.join("")}`;
+      
+      // Open the link in a new tab
+      window.open(finalUrl, "_blank");
+    }
+  </script>
+</body>
+</html>
